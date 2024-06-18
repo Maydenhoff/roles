@@ -6,7 +6,7 @@ const path = require('path');
 // const {
 //   DATA_BASE_URL
 // } = process.env;
-const sequelize = new Sequelize(`postgresql://postgres:postgres@localhost:5433/red`, {
+const sequelize = new Sequelize(`postgresql://postgres:postgres@localhost:5433/roles`, {
   // const sequelize = new Sequelize(`postgres://${DB_USER}:${DB_PASSWORD}@${DB_HOST}/drivers`, {
   logging: false, 
   native: false, 
@@ -28,19 +28,10 @@ let entries = Object.entries(sequelize.models);
 let capsEntries = entries.map((entry) => [entry[0][0].toUpperCase() + entry[0].slice(1), entry[1]]);
 sequelize.models = Object.fromEntries(capsEntries);
 
-const { User, Type, Product } = sequelize.models;
+const { User, Roles, Product } = sequelize.models;
 
-Type.hasMany(User, { foreignKey: 'typeId',  sourceKey: 'id' });
-User.belongsTo(Type, { foreignKey: 'typeId', targetKey: 'id' });
-
-// User.hasMany(Posts, { as: 'posts', foreignKey: 'userId' });
-// Posts.belongsTo(User, { as: 'user', foreignKey: 'userId' });
-
-// Aca vendrian las relaciones
-// Product.hasMany(Reviews);
-
-// Driver.belongsToMany(Team, {through: "driver_team"})
-// Team.belongsToMany(Driver, {through: "driver_team"})
+Roles.hasMany(User, { foreignKey: 'rolesId',  sourceKey: 'id' });
+User.belongsTo(Roles, { foreignKey: 'rolesId', targetKey: 'id' });
 
 module.exports = {
   ...sequelize.models, // para poder importar los modelos así: const { Product, User } = require('./db.js');

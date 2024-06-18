@@ -2,7 +2,7 @@ const { DataTypes } = require("sequelize");
 
 module.exports = (sequelize) => {
   sequelize.define(
-    "Type",
+    "Roles",
     {
       id: {
         type: DataTypes.UUID,
@@ -11,7 +11,7 @@ module.exports = (sequelize) => {
         defaultValue: DataTypes.UUIDV4,
       },
       name: {
-        type:DataTypes.ENUM("Admin", "User"),
+        type:DataTypes.ENUM("Admin", "User", "Manager"),
         allowNull: false,
     },
     },

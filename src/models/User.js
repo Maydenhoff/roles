@@ -19,11 +19,11 @@ module.exports = (sequelize) => {
         type: DataTypes.STRING,
         allowNull: false,
       },
-      typeId: {
+      rolesId: {
         type: DataTypes.UUID,
         allowNull: false,
         references: {
-          model: "Types", // Nombre de la tabla referenciada
+          model: "Roles", // Nombre de la tabla referenciada
           key: "id",
         },
       },
